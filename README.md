@@ -7,6 +7,9 @@ It is created based on the requirements described in the [task file](./TASK.md).
 
 * `git clone https://github.com/FlintOFF/web_crawler.git`
 * `bundle install`
+* install and start the Redis server
+  * `brew install redis`
+  * `brew services start redis`
 
 ## Run server
 
