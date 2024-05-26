@@ -1,0 +1,6 @@
+en:
+  interactors:
+    errors:
+      page_load: The page could not be loaded
+      css_syntax: Incorrect CSS selector syntax
+      invalid_url: URL is not valid
