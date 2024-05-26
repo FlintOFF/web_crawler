@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ScrapAndParse
   class Parse
     include Interactor
@@ -40,13 +42,12 @@ module ScrapAndParse
       else
         @doc.css(css_selector).first&.text
       end
-
     rescue Nokogiri::CSS::SyntaxError
       context.fail!(message: I18n.t('interactors.errors.css_syntax'))
     end
 
     def css_fields
-      @css_fields ||= context.params[:fields].reject { |k, _v| k == 'meta' }
+      @css_fields ||= context.params[:fields].except('meta')
     end
 
     def meta_fields

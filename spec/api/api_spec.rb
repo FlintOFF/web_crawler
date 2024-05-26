@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'API', type: :request do
@@ -19,13 +21,13 @@ describe 'API', type: :request do
     context 'when parameters are present and valid' do
       let(:expected_body) do
         {
-          "price" => "20 890,-",
-          "rating_count" => "7 hodnocení",
-          "rating_value" => "4,9",
-          "meta" => {
-            "keywords" => "AEG,7000,ProSteam®,LFR73964CC,Automatické " \
-                          "pračky,Automatické pračky AEG,Chytré pračky,Chytré pračky AEG",
-            "twitter:image" => "https://image.alza.cz/products/AEGPR065/AEGPR065.jpg?width=360&height=360"
+          'price' => '20 890,-',
+          'rating_count' => '7 hodnocení',
+          'rating_value' => '4,9',
+          'meta' => {
+            'keywords' => 'AEG,7000,ProSteam®,LFR73964CC,Automatické ' \
+                          'pračky,Automatické pračky AEG,Chytré pračky,Chytré pračky AEG',
+            'twitter:image' => 'https://image.alza.cz/products/AEGPR065/AEGPR065.jpg?width=360&height=360'
           }
         }
       end
@@ -38,7 +40,7 @@ describe 'API', type: :request do
 
     context 'when the CSS selector is invalid' do
       let(:params_fields) { { price: '$price-box__price' } }
-      let(:expected_body) { { "error" => I18n.t('interactors.errors.css_syntax') } }
+      let(:expected_body) { { 'error' => I18n.t('interactors.errors.css_syntax') } }
 
       it 'returns error' do
         expect(response.status).to eq(400)
@@ -48,7 +50,7 @@ describe 'API', type: :request do
 
     context 'when the URL is invalid' do
       let(:params_url) { 'httpss://www.alza.cz/aeg-7000-prosteam-lfr73964cc-d7635493.htm' }
-      let(:expected_body) { { "error" => I18n.t('interactors.errors.invalid_url') } }
+      let(:expected_body) { { 'error' => I18n.t('interactors.errors.invalid_url') } }
 
       it 'returns error' do
         expect(response.status).to eq(400)
@@ -58,7 +60,7 @@ describe 'API', type: :request do
 
     context 'when the URL is not present' do
       let(:params_url) { 'https://www.alza.cz/aeg-7000-prosteam-lfr73964cc-d7635493-11111111111111111.htm' }
-      let(:expected_body) { { "error" => I18n.t('interactors.errors.page_load') } }
+      let(:expected_body) { { 'error' => I18n.t('interactors.errors.page_load') } }
 
       it 'returns error' do
         expect(response.status).to eq(400)
@@ -68,7 +70,7 @@ describe 'API', type: :request do
 
     context 'when the CSS selector is valid but not present' do
       let(:params_fields) { { price: '.price-box__price_not_present' } }
-      let(:expected_body) { { "price" => nil } }
+      let(:expected_body) { { 'price' => nil } }
 
       it 'returns correct response' do
         expect(response.status).to eq(200)

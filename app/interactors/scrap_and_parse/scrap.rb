@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'open-uri'
 require 'redis'
 
@@ -11,9 +13,9 @@ module ScrapAndParse
 
     def call
       if read_cache_record
-        context.content = get_content_from_cache
+        context.content = read_content_from_cache
       else
-        context.content = get_content_from_source
+        context.content = read_content_from_source
         write_content_to_cache
         write_cache_record
       end
@@ -25,7 +27,7 @@ module ScrapAndParse
       @redis ||= Redis.new(host: REDIS_HOST)
     end
 
-    def get_content_from_source
+    def read_content_from_source
       response = Faraday.get(context.params[:url])
       context.fail!(message: I18n.t('interactors.errors.page_load')) unless response.status == 200
       response.body
@@ -33,7 +35,7 @@ module ScrapAndParse
       context.fail!(message: I18n.t('interactors.errors.invalid_url'))
     end
 
-    def get_content_from_cache
+    def read_content_from_cache
       File.read(file_path)
     end
 

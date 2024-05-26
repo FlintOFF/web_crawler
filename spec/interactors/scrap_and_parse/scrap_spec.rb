@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ScrapAndParse::Scrap do
@@ -9,8 +11,8 @@ RSpec.describe ScrapAndParse::Scrap do
 
   it 'returns the same content twice and make only one real request' do
     allow(Faraday).to receive(:get).and_return(dummy_struct.new(dummy_body, dummy_status))
-    first_body = described_class.call(params: params).content
-    second_body = described_class.call(params: params).content
+    first_body = described_class.call(params:).content
+    second_body = described_class.call(params:).content
     expect(Faraday).to have_received(:get).once
     expect(first_body).to eq dummy_body
     expect(first_body).to eq second_body

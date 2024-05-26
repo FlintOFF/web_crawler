@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ScrapAndParse
   class Organizer
     include Interactor::Organizer
