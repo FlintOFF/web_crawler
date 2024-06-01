@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ScrapAndParse::Scrap do
+RSpec.describe ScrapAndParse::Common::Scrap do
   let(:params) { { url: params_url } }
   let(:params_url) { "https://www.google.com/search?q=#{Time.now.to_i}" }
   let(:dummy_struct) { Struct.new(:body, :status) }
