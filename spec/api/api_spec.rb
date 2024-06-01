@@ -22,7 +22,7 @@ describe 'API', type: :request do
       let(:expected_body) do
         {
           'price' => '20 890,-',
-          'rating_count' => '7 hodnocení',
+          'rating_count' => '8 hodnocení',
           'rating_value' => '4,9',
           'meta' => {
             'keywords' => 'AEG,7000,ProSteam®,LFR73964CC,Automatické ' \

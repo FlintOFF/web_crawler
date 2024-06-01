@@ -12,7 +12,8 @@ module ScrapAndParse
     CACHE_TTL = 10 # seconds
 
     def call
-      if read_cache_record
+      cache_record_hsh = read_cache_record
+      if cache_record_hsh.present? && cache_record_valid?(cache_record_hsh)
         context.content = read_content_from_cache
       else
         context.content = read_content_from_source
@@ -44,11 +45,18 @@ module ScrapAndParse
     end
 
     def read_cache_record
-      redis.get(context.params[:url])
+      json = redis.get(context.params[:url])
+      json ? JSON.parse(json, symbolize_names: true) : nil
     end
 
     def write_cache_record
-      redis.setex(context.params[:url], CACHE_TTL, true)
+      redis.set(context.params[:url], { file_path:, expire_at: Time.now.to_i + CACHE_TTL }.to_json)
+    end
+
+    def cache_record_valid?(cache_record_hsh)
+      return false unless cache_record_hsh[:expire_at]
+
+      cache_record_hsh[:expire_at] > Time.now.to_i
     end
 
     def file_name
