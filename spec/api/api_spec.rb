@@ -21,7 +21,7 @@ describe 'API', type: :request do
     context 'when parameters are present and valid' do
       let(:expected_body) do
         {
-          'price' => '20 890,-',
+          'price' => '17 749,-',
           'rating_count' => '8 hodnocení',
           'rating_value' => '4,9',
           'meta' => {
